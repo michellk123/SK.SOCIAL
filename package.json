@@ -4,9 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate:reels": "node scripts/generate-posters.js --type reels --overwrite --json",
+    "generate:stories": "node scripts/generate-posters.js --type stories --overwrite --json",
+    "generate:all": "npm run generate:reels && npm run generate:stories",
+    "prebuild": "npm run gen:posters"
   },
   "private": true,
   "dependencies": {
