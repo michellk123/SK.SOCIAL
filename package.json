@@ -9,8 +9,7 @@
     "test": "ng test",
     "generate:reels": "node scripts/generate-posters.js --type reels --overwrite --json",
     "generate:stories": "node scripts/generate-posters.js --type stories --overwrite --json",
-    "generate:all": "npm run generate:reels && npm run generate:stories",
-    "prebuild": "npm run gen:posters"
+    "generate:all": "npm run generate:reels && npm run generate:stories"
   },
   "private": true,
   "dependencies": {
