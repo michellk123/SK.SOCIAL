@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, inject, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {filter, first} from 'rxjs';
+import {first} from 'rxjs';
 import {VideoMeta} from './model/video-meta';
-import {NavigationEnd, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -159,9 +159,40 @@ export class AppComponent implements OnInit, AfterViewInit {
   reelThumb(event: MouseEvent): void {
     const btn = (event.target as HTMLElement).closest('.thumb') as HTMLElement;
     if (!btn) return;
-    this.player.src = btn.dataset['video']!;
-    this.player.currentTime = 0;
-    this.modal.showModal();
-    this.player.play().catch(() => {});
+    const videoSrc = btn.dataset['video']!;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (isMobile) {
+      const video = document.createElement('video');
+      video.src = videoSrc;
+      video.controls = true;
+      video.autoplay = true;
+      video.playsInline = false; // מאפשר פתיחה למסך מלא אוטומטית
+      video.style.width = '100%';
+      video.style.position = 'fixed';
+      video.style.top = '0';
+      video.style.zIndex = '9999';
+      video.style.background = '#000';
+      video.style.objectFit = 'contain';
+
+      const close = () => video.remove();
+      video.addEventListener('click', close);
+      video.addEventListener('ended', close);
+
+      document.body.appendChild(video);
+      return;
+    }
+
+    // 💻 במחשב – נפתח דיאלוג רגיל, אבל נטען את הווידאו רק אחרי פתיחה
+    if (!this.modal.open) {
+      this.modal.showModal();
+
+      // נטען את הסרטון רק אחרי שהדיאלוג נפתח בפועל
+      setTimeout(() => {
+        this.player.src = videoSrc;
+        this.player.currentTime = 0;
+        this.player.play().catch(() => {});
+      }, 150);
+    }
   }
+
 }
