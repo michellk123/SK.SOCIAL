@@ -157,17 +157,6 @@ header.scrolled .links a {
   opacity: 0.5;
 }
 
-#our-reels::before {
-  content: "REELS";
-  position: absolute;
-  top: 2vh;
-  justify-self: anchor-center;
-  font-family: 'EB Garamond', serif;
-  font-size: 1rem;
-  letter-spacing: 0.1em;
-  opacity: 0.5;
-}
-
 .stories {
   display: flex;
   gap: 14px;
