@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, inject, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {filter, first} from 'rxjs';
+import {first} from 'rxjs';
 import {VideoMeta} from './model/video-meta';
-import {NavigationEnd, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -143,13 +143,22 @@ export class AppComponent implements OnInit, AfterViewInit {
     const marqueeTrack = document.querySelector('.marquee .track') as HTMLElement;
     window.addEventListener('blur', () => (marqueeTrack.style.animationPlayState = 'paused'));
     window.addEventListener('focus', () => (marqueeTrack.style.animationPlayState = 'running'));
+
+    this.modal.addEventListener('cancel', (e) => {
+      e.preventDefault();
+      this.closeModal();
+    });
   }
 
   closeModal(): void {
     this.player.pause();
     this.player.removeAttribute('src');
     this.player.load();
-    this.modal.close();
+    this.modal.classList.add('closing');
+    setTimeout(() => {
+      this.modal.classList.remove('closing');
+      this.modal.close();
+    }, 300);
   }
 
   modalDialog(event: MouseEvent): void {
@@ -162,6 +171,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.player.src = btn.dataset['video']!;
     this.player.currentTime = 0;
     this.modal.showModal();
+    this.modal.classList.add('opening');
+    setTimeout(() => this.modal.classList.remove('opening'), 300);
     this.player.play().catch(() => {});
   }
 }

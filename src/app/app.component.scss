@@ -124,9 +124,7 @@ header.scrolled .links a {
 }
 
 .marquee .thumb img {
-  height: 100%;
-  object-fit: cover;
-  opacity: .95;
+  height: 30rem;
   border-radius: 14px;
 }
 
@@ -258,6 +256,10 @@ header.scrolled .links a {
   nav .links {
     display: none
   }
+
+  .modal video {
+    max-height: 65vh;
+  }
 }
 
 figure {
@@ -294,29 +296,52 @@ dialog {
   border: none;
   border-radius: 16px;
   padding: 0;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, .45);
-  max-width: min(800px, 90vw);
-}
-
-dialog::backdrop {
-  background: rgba(0, 0, 0, .6)
-}
-
-.modal {
-  background: #000;
-}
-
-.modal video {
-  width: 100%;
+  background: transparent;
 }
 
 .modal .close {
   display: none;
 }
 
+dialog.opening {
+  animation: fadeInZoom 0.6s ease forwards;
+}
+
+dialog.closing {
+  animation: fadeOutZoom 0.6s ease forwards;
+}
+
+@keyframes fadeInZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOutZoom {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(16px) brightness(0.8) saturate(1.2);
+  transition: background 0.6s ease, backdrop-filter 0.6s ease;
+}
+
 @media (min-width: 768px) {
   .modal video {
-    max-height: 90vh;
+    max-height: 92vh;
   }
 
   .best-reel {
