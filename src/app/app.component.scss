@@ -258,18 +258,6 @@ header.scrolled .links a {
   }
 
   .modal {
-    video {
-      max-height: 66vh;
-      background-color: #000 !important;
-      outline: none !important;
-      border: none !important;
-      box-shadow: none !important;
-      -webkit-tap-highlight-color: transparent !important;
-      -webkit-user-select: none;
-      -webkit-touch-callout: none;
-      display: block;
-    }
-
     video:focus,
     video:active {
       outline: none !important;
@@ -277,16 +265,6 @@ header.scrolled .links a {
       border: none !important;
       -webkit-tap-highlight-color: transparent !important;
     }
-  }
-
-  dialog:focus {
-    outline: none !important;
-    border: none !important;
-  }
-
-  /* הסרת highlight כולל מכל הדף במובייל */
-  body {
-    -webkit-tap-highlight-color: transparent !important;
   }
 }
 
