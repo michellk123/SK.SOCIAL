@@ -257,11 +257,13 @@ header.scrolled .links a {
     display: none
   }
 
-  .modal {
-    video:focus,
-    video:active {
-      outline: none !important;
-    }
+  .modal video {
+    max-height: 66vh;
+  }
+
+  video:focus,
+  video:active {
+    outline: none !important;
   }
 }
 
