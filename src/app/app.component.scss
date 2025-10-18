@@ -303,6 +303,18 @@ dialog {
   display: none;
 }
 
+@supports (-webkit-touch-callout: none) {
+  dialog {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: unset;
+    background-color: #000 !important;
+  }
+
+  video {
+    background-color: #000 !important;
+  }
+}
+
 dialog.opening {
   animation: fadeInZoom 0.6s ease forwards;
 }
