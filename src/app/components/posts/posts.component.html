@@ -1,0 +1,12 @@
+<section class="posts-section">
+  <div class="section-head">
+    <span class="section-label">03 / POSTS</span>
+  </div>
+  <div class="posts-grid">
+    @for (post of posts; track post; let i = $index) {
+      <figure class="post-card" [class.featured]="i === 0 || i === 7">
+        <img [src]="post" loading="lazy" alt="Post" />
+      </figure>
+    }
+  </div>
+</section>

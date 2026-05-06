@@ -1,0 +1,115 @@
+:host {
+  display: block;
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.video-wrap {
+  position: absolute;
+  inset: 0;
+
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.15) 40%,
+      rgba(0, 0, 0, 0.72) 100%
+    );
+  }
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: clamp(28px, 5vw, 64px);
+  padding-bottom: clamp(72px, 9vw, 110px);
+}
+
+.hero-eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(0.45rem, 1vw, 0.62rem);
+  letter-spacing: 0.24em;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 13vw, 12rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 0.88;
+  color: #fff;
+  margin: 0 0 16px;
+
+  em {
+    font-style: italic;
+    color: var(--accent);
+  }
+}
+
+.hero-name {
+  font-family: var(--font-mono);
+  font-size: clamp(0.5rem, 1.1vw, 0.72rem);
+  letter-spacing: 0.32em;
+  color: rgba(255, 255, 255, 0.42);
+  margin: 0;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  right: clamp(28px, 5vw, 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.scroll-word {
+  font-family: var(--font-mono);
+  font-size: 0.45rem;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.3);
+  writing-mode: vertical-rl;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 52px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.25; transform: scaleY(0.6); transform-origin: top; }
+  50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    text-align: center;
+    padding: 24px 24px 88px;
+  }
+
+  .scroll-hint {
+    display: none;
+  }
+}

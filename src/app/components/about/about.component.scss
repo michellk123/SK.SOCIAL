@@ -1,0 +1,54 @@
+:host {
+  display: block;
+}
+
+.about-section {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 72px clamp(20px, 5vw, 64px) 100px;
+  direction: rtl;
+}
+
+.about-body {
+  max-width: 720px;
+}
+
+.about-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.4;
+  margin: 0 0 28px;
+}
+
+.about-text {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.9;
+  color: var(--muted);
+  margin: 0 0 16px;
+
+  &:last-of-type {
+    margin-bottom: 32px;
+  }
+}
+
+.ig-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 5px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+}

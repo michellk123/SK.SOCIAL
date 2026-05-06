@@ -1,0 +1,130 @@
+:host {
+  display: block;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: var(--scrollbar-comp, 0);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 40px;
+  transition: background 0.5s ease, backdrop-filter 0.5s ease, padding 0.3s ease, border-color 0.5s ease;
+  border-bottom: 1px solid transparent;
+}
+
+header.scrolled {
+  background: rgba(8, 8, 8, 0.9);
+  backdrop-filter: blur(24px) saturate(1.4);
+  padding: 12px 40px;
+  border-bottom-color: var(--border);
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .logo-main {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.14em;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .logo-sub {
+    font-family: var(--font-mono);
+    font-size: 0.42rem;
+    letter-spacing: 0.28em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+}
+
+nav {
+  display: flex;
+  gap: 28px;
+
+  a {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.55);
+    text-transform: uppercase;
+    position: relative;
+    padding: 4px 0;
+    transition: color 0.25s ease, transform 0.25s ease;
+    cursor: pointer;
+    will-change: transform;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    &:hover {
+      color: #fff;
+
+      &::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+
+    &.active {
+      color: #fff;
+
+      &::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+
+    &.pulse {
+      animation: navPulse 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+  }
+}
+
+@keyframes navPulse {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.16); color: var(--accent); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  nav a,
+  nav a::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 16px 20px;
+    gap: 0;
+  }
+
+  header.scrolled {
+    padding: 10px 20px;
+  }
+
+  nav {
+    display: none;
+  }
+}

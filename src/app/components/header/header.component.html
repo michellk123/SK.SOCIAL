@@ -1,0 +1,14 @@
+<header [class.scrolled]="scrolled">
+  <div class="logo">
+    <span class="logo-main">SK.SOCIAL</span>
+    <span class="logo-sub">SARAI KROTOVICH</span>
+  </div>
+  <nav>
+    @for (item of nav; track item.id) {
+      <a [href]="'#' + item.id"
+         [class.active]="activeId === item.id"
+         [class.pulse]="pulsingId === item.id"
+         (click)="goTo($event, item.id)">{{ item.label }}</a>
+    }
+  </nav>
+</header>

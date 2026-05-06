@@ -1,0 +1,266 @@
+:host {
+  display: contents;
+}
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: var(--scrollbar-comp, 0);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: rgba(0, 0, 0, 0);
+  will-change: background-color;
+
+  &.is-open {
+    animation: lxBgIn 0.36s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  &.is-closing {
+    animation: lxBgOut 0.24s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    pointer-events: none;
+  }
+}
+
+@keyframes lxBgIn {
+  to { background: rgba(0, 0, 0, 0.96); }
+}
+
+@keyframes lxBgOut {
+  from { background: rgba(0, 0, 0, 0.96); }
+  to   { background: rgba(0, 0, 0, 0); }
+}
+
+// ── Close button ──────────────────────────────────────────────
+.lx-close {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.65rem;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  animation: lxFadeIn 0.4s 0.1s both;
+
+  .is-closing & { animation: lxFadeOut 0.18s ease forwards; }
+
+  &:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    transform: rotate(90deg);
+  }
+}
+
+// ── Counter ───────────────────────────────────────────────────
+.lx-counter {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.25);
+  animation: lxFadeIn 0.4s 0.16s both;
+  pointer-events: none;
+  white-space: nowrap;
+
+  .is-closing & { animation: lxFadeOut 0.18s ease forwards; }
+}
+
+// ── Stage (arrows + video) ────────────────────────────────────
+.lx-stage {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  animation: lxStageIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.06s both;
+  will-change: transform, opacity;
+
+  &.is-closing {
+    animation: lxStageOut 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}
+
+.lx-video-wrap {
+  position: relative;
+
+  video {
+    display: block;
+    max-height: 82vh;
+    max-width: min(80vw, 960px);
+    border-radius: 10px;
+    background: #000;
+    object-fit: contain;
+    box-shadow: 0 32px 100px rgba(0, 0, 0, 0.85);
+    transition: opacity 0.22s ease;
+
+    &.is-switching { opacity: 0; }
+  }
+}
+
+// ── Loading spinner ───────────────────────────────────────────
+.lx-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-top-color: var(--accent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+
+  .is-loading & {
+    opacity: 1;
+    animation: lxSpin 0.8s linear infinite;
+  }
+}
+
+// ── Nav arrows ────────────────────────────────────────────────
+.lx-nav {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 2.2rem;
+  line-height: 0.9;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+  &.invisible {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #fff;
+  }
+
+  &.lx-prev:hover { transform: translateX(-4px); }
+  &.lx-next:hover { transform: translateX(4px); }
+}
+
+// ── Dot indicators ────────────────────────────────────────────
+.lx-dots {
+  display: flex;
+  gap: 8px;
+  animation: lxFadeIn 0.4s 0.22s both;
+
+  .is-closing & { animation: lxFadeOut 0.18s ease forwards; }
+}
+
+.lx-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease, transform 0.25s ease;
+
+  &.active {
+    background: var(--accent);
+    transform: scale(1.5);
+  }
+
+  &:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.5);
+  }
+}
+
+// ── Animations ────────────────────────────────────────────────
+@keyframes lxStageIn {
+  from { opacity: 0; transform: scale(0.94) translateY(14px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+@keyframes lxStageOut {
+  from { opacity: 1; transform: scale(1)    translateY(0); }
+  to   { opacity: 0; transform: scale(0.96) translateY(6px); }
+}
+
+@keyframes lxFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes lxFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes lxSpin {
+  to { transform: rotate(360deg); }
+}
+
+// ── Reduced motion ────────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+  .lightbox,
+  .lightbox.is-open,
+  .lightbox.is-closing,
+  .lx-stage,
+  .lx-stage.is-closing,
+  .lx-close,
+  .lx-counter,
+  .lx-dots,
+  .lx-spinner {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .lightbox.is-open { background: rgba(0, 0, 0, 0.96); }
+  .lx-video-wrap video { transition: none; }
+}
+
+// ── Mobile ────────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .lightbox {
+    gap: 14px;
+  }
+
+  .lx-nav {
+    display: none;
+  }
+
+  .lx-video-wrap video {
+    max-height: 72vh;
+    max-width: 96vw;
+  }
+
+  .lx-close {
+    top: 16px;
+    right: 16px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .lx-counter {
+    top: 20px;
+  }
+}

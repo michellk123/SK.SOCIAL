@@ -1,0 +1,50 @@
+@if (visible) {
+  <div class="lightbox"
+       [class.is-open]="!closing"
+       [class.is-closing]="closing"
+       (click)="onBackdropClick($event)">
+
+    <button class="lx-close" (click)="close()" aria-label="Close">✕</button>
+
+    @if (playlist.length > 1) {
+      <span class="lx-counter">{{ counter }}</span>
+    }
+
+    <div #stage class="lx-stage" [class.is-closing]="closing">
+      <button class="lx-nav lx-prev"
+              [class.invisible]="!hasPrev"
+              (click)="prev()"
+              aria-label="Previous">‹</button>
+
+      <div class="lx-video-wrap" [class.is-loading]="loading">
+        <video #player
+               controls
+               playsinline
+               preload="metadata"
+               [attr.poster]="currentPoster"
+               [class.is-switching]="switching"
+               (canplay)="onCanPlay()"
+               (waiting)="loading = true"
+               (playing)="loading = false"></video>
+        <span class="lx-spinner" aria-hidden="true"></span>
+      </div>
+
+      <button class="lx-nav lx-next"
+              [class.invisible]="!hasNext"
+              (click)="next()"
+              aria-label="Next">›</button>
+    </div>
+
+    @if (playlist.length > 1 && playlist.length <= 16) {
+      <div class="lx-dots">
+        @for (item of playlist; track $index; let i = $index) {
+          <button class="lx-dot"
+                  [class.active]="i === currentIndex"
+                  (click)="goTo(i)"
+                  [attr.aria-label]="'Video ' + (i + 1)"></button>
+        }
+      </div>
+    }
+
+  </div>
+}

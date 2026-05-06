@@ -1,0 +1,24 @@
+<section class="stories-section">
+  <div class="section-head">
+    <span class="section-label">02 / STORIES</span>
+  </div>
+  <div class="stories-grid">
+    @for (story of stories; track story.src; let i = $index) {
+      <article class="story-card"
+               (click)="open(i)"
+               role="button"
+               tabindex="0"
+               (keydown.enter)="open(i)"
+               [attr.aria-label]="'Play story ' + (i + 1)">
+        <img [src]="story.poster" loading="lazy" [alt]="'Story ' + (i + 1)" />
+        <div class="play-overlay">
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+        </div>
+      </article>
+    }
+  </div>
+</section>

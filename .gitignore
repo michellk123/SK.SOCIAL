@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Claude Code local tooling (per-user, not part of the app)
+.claude/
+.agents/
+skills-lock.json
