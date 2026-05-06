@@ -56,6 +56,7 @@ nav {
     font-size: 0.72rem;
     letter-spacing: 0.2em;
     color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
     text-transform: uppercase;
     position: relative;
     padding: 4px 0;
@@ -63,35 +64,12 @@ nav {
     cursor: pointer;
     will-change: transform;
 
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
     &:hover {
       color: #fff;
-
-      &::after {
-        transform: scaleX(1);
-        transform-origin: left;
-      }
     }
 
     &.active {
-      color: #fff;
-
-      &::after {
-        transform: scaleX(1);
-        transform-origin: left;
-      }
+      color: var(--accent);
     }
 
     &.pulse {
@@ -107,8 +85,7 @@ nav {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  nav a,
-  nav a::after {
+  nav a {
     transition: none !important;
     animation: none !important;
   }
