@@ -46,7 +46,6 @@
   font-size: clamp(0.45rem, 1vw, 0.62rem);
   letter-spacing: 0.24em;
   color: rgba(255, 255, 255, 0.45);
-  margin-bottom: 18px;
   text-transform: uppercase;
 }
 
@@ -71,6 +70,7 @@
   letter-spacing: 0.32em;
   color: rgba(255, 255, 255, 0.42);
   margin: 0;
+  margin-bottom: 18px;
 }
 
 .scroll-hint {
