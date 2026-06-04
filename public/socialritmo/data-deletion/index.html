@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+  SocialRitmo Data Deletion — static page served outside the Angular SPA.
+  Served by Netlify at /socialritmo/data-deletion (from public/socialritmo/data-deletion/index.html).
+  Required by Meta App Review AND returned to users by the Instagram data-deletion
+  callback for the SocialRitmo app (a product of S.K Social). Not linked from site
+  navigation. Source of truth: SocialRitmo app repo tasks/app-review/data-deletion.md.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>SocialRitmo — Data Deletion</title>
+<style>
+  :root { --ink:#1a1a1f; --muted:#55555f; --accent:#6D5BD0; --line:#e6e6ec; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; color: var(--ink); background: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 22px 80px; }
+  h1 { font-size: 28px; line-height: 1.25; margin: 0 0 6px; }
+  h2 { font-size: 18px; margin: 34px 0 10px; }
+  h3 { font-size: 15.5px; margin: 22px 0 6px; }
+  .meta { color: var(--muted); font-size: 14px; margin: 0 0 4px; }
+  .rule { height: 1px; background: var(--line); border: 0; margin: 24px 0; }
+  p, li { font-size: 15.5px; }
+  ul, ol { padding-left: 22px; }
+  li { margin: 6px 0; }
+  code { background: #f4f4f7; padding: 1px 5px; border-radius: 5px; font-size: 13.5px; }
+  a { color: var(--accent); }
+  strong { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>SocialRitmo — Data Deletion</h1>
+  <p class="meta"><strong>Last updated:</strong> 4 June 2026</p>
+  <hr class="rule">
+
+  <h2>How to delete your Instagram data from SocialRitmo</h2>
+  <p>SocialRitmo (a product of S.K Social) only stores Instagram data if a social media manager has connected an Instagram account to display its recent posts inside their planning grid. You can have that data deleted at any time using any of the methods below.</p>
+
+  <h3>Option 1 — Remove SocialRitmo in Instagram (automatic)</h3>
+  <ol>
+    <li>Open Instagram → <strong>Settings</strong> → <strong>Apps and Websites</strong> (or <strong>Website Permissions</strong>).</li>
+    <li>Find <strong>SocialRitmo</strong> and choose <strong>Remove</strong>.</li>
+  </ol>
+  <p>Instagram notifies SocialRitmo automatically. We then immediately delete the stored access token and Instagram identifiers for that connection. No further action is needed.</p>
+
+  <h3>Option 2 — Disconnect inside SocialRitmo</h3>
+  <p>If you manage the account inside SocialRitmo, open the client’s content screen and tap <strong>Disconnect</strong>. This deletes the stored token and Instagram identifiers for that connection right away.</p>
+
+  <h3>Option 3 — Email request</h3>
+  <p>Email <a href="mailto:saraik.social@gmail.com">saraik.social@gmail.com</a> from the address associated with your account, or include the connected Instagram username, and ask us to delete the connection’s data. We will process the request and confirm within 30 days.</p>
+
+  <h2>What gets deleted</h2>
+  <p>For the affected connection we delete:</p>
+  <ul>
+    <li>the encrypted Instagram access token,</li>
+    <li>the stored Instagram user ID and connection timestamps.</li>
+  </ul>
+  <p>SocialRitmo does not store copies of the Instagram account’s posts — post thumbnails are displayed live from Instagram and are not retained after deletion.</p>
+
+  <h2>Confirmation</h2>
+  <p>When Instagram triggers an automatic deletion (Option 1), SocialRitmo returns a confirmation code and this status page. If you reached this page with a <code>?id=</code> value in the address bar, that is your confirmation code — keep it for your records. To verify the status of a request, contact <a href="mailto:saraik.social@gmail.com">saraik.social@gmail.com</a> with that code.</p>
+</div>
+</body>
+</html>
