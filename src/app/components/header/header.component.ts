@@ -22,6 +22,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ];
 
   private observer?: IntersectionObserver;
+  private intersecting = new Map<string, number>();
+  private navigating = false;
+  private navigatingTimer: ReturnType<typeof setTimeout> | undefined;
 
   ngOnInit() {
     requestAnimationFrame(() => this.observeSections());
@@ -45,6 +48,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const headerH = header?.getBoundingClientRect().height ?? 0;
     const top = target.getBoundingClientRect().top + window.scrollY - headerH - 12;
 
+    this.activeId = id;
+    this.navigating = true;
+    clearTimeout(this.navigatingTimer);
+    this.navigatingTimer = setTimeout(() => { this.navigating = false; }, 900);
+
     const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
     history.replaceState(null, '', `#${id}`);
@@ -61,10 +69,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter(e => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) this.activeId = visible[0].target.id;
+        if (this.navigating) return;
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            this.intersecting.set(entry.target.id, entry.intersectionRatio);
+          } else {
+            this.intersecting.delete(entry.target.id);
+          }
+        }
+        let topId: string | null = null;
+        let topRatio = -1;
+        for (const [id, ratio] of this.intersecting) {
+          if (ratio > topRatio) { topRatio = ratio; topId = id; }
+        }
+        this.activeId = topId;
       },
       { rootMargin: '-30% 0px -55% 0px', threshold: [0, 0.25, 0.5, 1] }
     );
