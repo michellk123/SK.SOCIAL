@@ -35,6 +35,12 @@
   }
 }
 
+.contact-links {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+}
+
 .ig-link {
   display: inline-flex;
   align-items: center;
