@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   scrolled = false;
   activeId: string | null = null;
   pulsingId: string | null = null;
+  menuOpen = false;
 
   readonly nav: NavItem[] = [
     { id: 'our-reels', label: 'REELS' },
@@ -32,6 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.observer?.disconnect();
+    document.body.style.overflow = '';
   }
 
   @HostListener('window:scroll')
@@ -39,8 +41,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.scrolled = window.scrollY > 60;
   }
 
+  @HostListener('document:keydown.escape')
+  onEsc() {
+    if (this.menuOpen) this.closeMenu();
+  }
+
+  toggleMenu() {
+    if (this.menuOpen) {
+      this.closeMenu();
+    } else {
+      this.menuOpen = true;
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+    document.body.style.overflow = '';
+  }
+
   goTo(event: MouseEvent, id: string) {
     event.preventDefault();
+    this.closeMenu();
     const target = document.getElementById(id);
     if (!target) return;
 

@@ -3,7 +3,7 @@
     <span class="logo-main">SK.SOCIAL</span>
     <span class="logo-sub">SARAI KROTOVICH</span>
   </div>
-  <nav>
+  <nav class="desktop-nav">
     @for (item of nav; track item.id) {
       <a [href]="'#' + item.id"
          [class.active]="activeId === item.id"
@@ -11,4 +11,26 @@
          (click)="goTo($event, item.id)">{{ item.label }}</a>
     }
   </nav>
+  <button class="menu-toggle"
+          [class.open]="menuOpen"
+          [attr.aria-expanded]="menuOpen"
+          [attr.aria-label]="menuOpen ? 'Close menu' : 'Open menu'"
+          (click)="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </header>
+
+<div class="mobile-overlay"
+     [class.open]="menuOpen"
+     [attr.aria-hidden]="menuOpen ? null : 'true'">
+  <nav>
+    @for (item of nav; track item.id; let i = $index) {
+      <a [href]="'#' + item.id"
+         [class.active]="activeId === item.id"
+         [style.transition-delay]="menuOpen ? (i * 75 + 80) + 'ms' : '0ms'"
+         (click)="goTo($event, item.id)">{{ item.label }}</a>
+    }
+  </nav>
+</div>
