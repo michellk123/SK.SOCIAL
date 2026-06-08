@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     { id: 'posts',     label: 'POSTS' },
     { id: 'brands',    label: 'BRANDS' },
     { id: 'about',     label: 'ABOUT' },
+    { id: 'contact',   label: 'CONTACT' },
   ];
 
   private observer?: IntersectionObserver;

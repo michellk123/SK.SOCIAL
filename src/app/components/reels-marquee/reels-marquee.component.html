@@ -1,16 +1,16 @@
 <section class="reels-section">
   <div class="section-head">
-    <span class="section-label">01 / REELS</span>
+    <h2 class="section-label">01 / REELS</h2>
   </div>
   <div class="marquee-wrap">
     <div class="track"
          [class.animate]="animate"
          [style.animationPlayState]="paused ? 'paused' : 'running'"
          (click)="onTrackClick($event)">
-      @for (item of items; track $index) {
-        <button class="thumb" [attr.data-video]="item.src">
-          <img [src]="item.poster" loading="lazy" alt="Reel preview" />
-          <div class="thumb-hover">
+      @for (item of items; track $index; let i = $index) {
+        <button class="thumb" [attr.data-video]="item.src" [attr.aria-label]="'Play reel ' + (i + 1)">
+          <img [src]="item.poster" loading="lazy" alt="" />
+          <div class="thumb-hover" aria-hidden="true">
             <span class="play-icon">▶</span>
           </div>
         </button>

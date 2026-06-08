@@ -7,6 +7,7 @@ import { PostsComponent } from './components/posts/posts.component';
 import { BrandsComponent } from './components/brands/brands.component';
 import { AboutComponent } from './components/about/about.component';
 import { VideoLightboxComponent } from './components/video-lightbox/video-lightbox.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ import { VideoLightboxComponent } from './components/video-lightbox/video-lightb
     PostsComponent,
     BrandsComponent,
     AboutComponent,
+    FooterComponent,
     VideoLightboxComponent,
   ],
   templateUrl: './app.component.html',

@@ -23,6 +23,7 @@ html, body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
+  color-scheme: dark;
   font-family: var(--font-mono), system-ui, Heebo, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -61,10 +62,11 @@ figure {
   display: block;
   font-family: var(--font-mono);
   font-size: 0.62rem;
+  font-weight: 400;
   letter-spacing: 0.22em;
   color: var(--accent);
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin: 0 0 12px;
 }
 
 .section-title {
