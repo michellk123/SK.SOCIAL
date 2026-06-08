@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { RevealDirective } from '../../directives/reveal.directive';
 
 @Component({
   selector: 'app-posts',
   standalone: true,
+  imports: [RevealDirective],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
 })

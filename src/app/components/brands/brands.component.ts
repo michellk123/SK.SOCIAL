@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { RevealDirective } from '../../directives/reveal.directive';
 
 @Component({
   selector: 'app-brands',
   standalone: true,
+  imports: [RevealDirective],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.scss',
 })

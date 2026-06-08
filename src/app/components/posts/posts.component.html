@@ -1,8 +1,8 @@
 <section class="posts-section">
-  <div class="section-head">
+  <div class="section-head" [appReveal]="0">
     <h2 class="section-label">03 / POSTS</h2>
   </div>
-  <div class="posts-grid">
+  <div class="posts-grid" [appReveal]="120">
     @for (post of posts; track post; let i = $index) {
       <figure class="post-card" [class.featured]="i === 0 || i === 7">
         <img [src]="post" loading="lazy" alt="" />

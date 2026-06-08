@@ -3,10 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { first } from 'rxjs';
 import { VideoMeta } from '../../model/video-meta';
 import { VideoLightboxService } from '../../services/video-lightbox.service';
+import { RevealDirective } from '../../directives/reveal.directive';
 
 @Component({
   selector: 'app-reels-marquee',
   standalone: true,
+  imports: [RevealDirective],
   templateUrl: './reels-marquee.component.html',
   styleUrl: './reels-marquee.component.scss',
 })

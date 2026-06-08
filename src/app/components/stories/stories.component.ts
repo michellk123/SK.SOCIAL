@@ -3,11 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { first } from 'rxjs';
 import { VideoMeta } from '../../model/video-meta';
 import { VideoLightboxService } from '../../services/video-lightbox.service';
+import { RevealDirective } from '../../directives/reveal.directive';
 
 @Component({
   selector: 'app-stories',
   standalone: true,
-  imports: [],
+  imports: [RevealDirective],
   templateUrl: './stories.component.html',
   styleUrl: './stories.component.scss',
 })
