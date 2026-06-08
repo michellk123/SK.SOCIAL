@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, inject, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, inject, OnInit, ViewChild } from '@angular/core';
 import { VideoLightboxService } from '../../services/video-lightbox.service';
 import { VideoMeta } from '../../model/video-meta';
 
@@ -14,6 +14,7 @@ export class VideoLightboxComponent implements OnInit {
   @ViewChild('stage') stageRef!: ElementRef<HTMLElement>;
 
   private svc = inject(VideoLightboxService);
+  private cdr = inject(ChangeDetectorRef);
 
   playlist: VideoMeta[] = [];
   currentIndex = -1;
@@ -39,7 +40,9 @@ export class VideoLightboxComponent implements OnInit {
     this.closing = false;
     this.visible = true;
     this.lockScroll();
-    requestAnimationFrame(() => this.playAt(index));
+    // Force Angular to render the @if block so playerRef is available immediately
+    this.cdr.detectChanges();
+    this.playAt(index);
   }
 
   close() {
@@ -70,7 +73,6 @@ export class VideoLightboxComponent implements OnInit {
       finish();
     };
     stage.addEventListener('animationend', onEnd);
-    // Hard safety net in case animationend never fires (e.g. tab hidden)
     setTimeout(() => { if (this.closing) { stage.removeEventListener('animationend', onEnd); finish(); } }, 360);
   }
 
@@ -99,6 +101,11 @@ export class VideoLightboxComponent implements OnInit {
   onCanPlay() {
     this.loading = false;
     this.switching = false;
+    // Retry play in case the initial call in playAt() was rejected
+    // (browsers reject play() called right after load() before data is ready)
+    if (this.visible && !this.closing) {
+      this.playerRef?.nativeElement.play().catch(() => {});
+    }
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -137,7 +144,8 @@ export class VideoLightboxComponent implements OnInit {
     this.switching = true;
     player.src = item.src;
     player.load();
-    player.currentTime = 0;
+    // Triggers buffering beyond preload="metadata"; may be rejected if data
+    // isn't ready yet — onCanPlay() retries once the browser signals readiness
     player.play().catch(() => {});
   }
 }
