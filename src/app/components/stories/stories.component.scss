@@ -17,6 +17,9 @@
 
 .story-card {
   position: relative;
+  border: none;
+  padding: 0;
+  font: inherit;
   border-radius: 18px;
   overflow: hidden;
   aspect-ratio: 9 / 16;
