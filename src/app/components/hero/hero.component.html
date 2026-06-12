@@ -2,6 +2,7 @@
   <div class="video-wrap">
     <video #heroVideo
            [src]="isMobile ? 'assets/reels/best-real/IMG_5386.MOV' : 'assets/reels/best-real/IMG_5607.mp4'"
+           [poster]="isMobile ? 'assets/reels/best-real/poster-mobile.jpg' : 'assets/reels/best-real/poster-desktop.jpg'"
            autoplay muted playsinline preload="auto" loop
            class="hero-video"></video>
     <div class="overlay"></div>
