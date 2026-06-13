@@ -7,6 +7,10 @@
   border-top: 1px solid var(--border);
   padding: 96px clamp(20px, 5vw, 64px) 88px;
   text-align: center;
+
+  .section-head {
+    text-align: left;
+  }
 }
 
 .cta-headline {
